@@ -1,4 +1,7 @@
 # API-KEY-GEN
+<p align="center">
+  <img src="1782718770759.png" alt="Profile Image" width="400"/>
+</p>
 
 API-KEY-GEN creates cryptographically secure, 256-bit API keys. Available in Node.js, Python, and Go, it features customizable prefixes (like 'sk_live_') and auto-generates SHA-256 hashes so you never have to store plaintext keys in your database.
 

@@ -1,0 +1,7 @@
+daysBeforeStale: 60
+daysBeforeClose: 7
+staleLabel: wontfix
+exemptLabels:
+  - pinned
+  - security
+  

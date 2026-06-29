@@ -34,3 +34,100 @@ if __name__ == "__main__":
     print("--- API-KEY-GEN ---")
     print(f"Give this to the user: {new_key_data['raw_key']}")
     print(f"Save this to the DB:   {new_key_data['db_hash']}")
+
+const crypto = require('crypto');
+
+class ApiKeyGen {
+    /**
+     * API-KEY-GEN: A secure API key generator and hasher.
+     * @param {string} prefix - The prefix to append to the key (default: 'sk_live_')
+     */
+    constructor(prefix = 'sk_live_') {
+        this.prefix = prefix;
+    }
+
+    /**
+     * Generates a 256-bit API key and its SHA-256 hash.
+     * @returns {Object} An object containing the rawKey and dbHash.
+     */
+    generate() {
+        // Generate the raw key
+        const randomBytes = crypto.randomBytes(32).toString('base64url');
+        const rawKey = `${this.prefix}${randomBytes}`;
+        
+        // Generate the hash to store in your database
+        const dbHash = crypto.createHash('sha256').update(rawKey).digest('hex');
+        
+        return { rawKey, dbHash };
+    }
+}
+
+// --- Example Usage ---
+const generator = new ApiKeyGen('sk_live_');
+const newKeyData = generator.generate();
+
+console.log('--- API-KEY-GEN ---');
+console.log(`Give this to the user: ${newKeyData.rawKey}`);
+console.log(`Save this to the DB:   ${newKeyData.dbHash}`);
+
+package main
+
+import (
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/base64"
+	"encoding/hex"
+	"fmt"
+)
+
+// ApiKeyGen represents the generator instance
+type ApiKeyGen struct {
+	Prefix string
+}
+
+// KeyData holds both the raw key and the hashed version
+type KeyData struct {
+	RawKey string
+	DBHash string
+}
+
+// NewApiKeyGen creates a new API-KEY-GEN instance
+func NewApiKeyGen(prefix string) *ApiKeyGen {
+	return &ApiKeyGen{Prefix: prefix}
+}
+
+// Generate creates a 256-bit API key and its SHA-256 hash
+func (g *ApiKeyGen) Generate() (*KeyData, error) {
+	// Generate the raw key
+	bytes := make([]byte, 32)
+	if _, err := rand.Read(bytes); err != nil {
+		return nil, err
+	}
+	
+	randomStr := base64.RawURLEncoding.EncodeToString(bytes)
+	rawKey := g.Prefix + randomStr
+	
+	// Generate the hash to store in your database
+	hash := sha256.Sum256([]byte(rawKey))
+	dbHash := hex.EncodeToString(hash[:])
+	
+	return &KeyData{
+		RawKey: rawKey,
+		DBHash: dbHash,
+	}, nil
+}
+
+// --- Example Usage ---
+func main() {
+	generator := NewApiKeyGen("sk_live_")
+	
+	newKeyData, err := generator.Generate()
+	if err != nil {
+		fmt.Println("Error generating key:", err)
+		return
+	}
+	
+	fmt.Println("--- API-KEY-GEN ---")
+	fmt.Printf("Give this to the user: %s\n", newKeyData.RawKey)
+	fmt.Printf("Save this to the DB:   %s\n", newKeyData.DBHash)
+}

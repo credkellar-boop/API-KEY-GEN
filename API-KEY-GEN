@@ -1,0 +1,36 @@
+import secrets
+import hashlib
+import argparse
+
+class ApiKeyGen:
+    """API-KEY-GEN: A secure API key generator and hasher."""
+    
+    def __init__(self, prefix="sk_live_"):
+        self.prefix = prefix
+
+    def generate(self):
+        """Generates a 256-bit API key and its SHA-256 hash for secure storage."""
+        # Generate the raw key
+        random_bytes = secrets.token_urlsafe(32)
+        raw_key = f"{self.prefix}{random_bytes}"
+        
+        # Generate the hash to store in your database
+        key_hash = hashlib.sha256(raw_key.encode()).hexdigest()
+        
+        return {
+            "raw_key": raw_key,
+            "db_hash": key_hash
+        }
+
+# --- CLI Implementation ---
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="API-KEY-GEN: Secure Key Generator")
+    parser.add_argument("--prefix", type=str, default="sk_live_", help="Prefix for the API key")
+    args = parser.parse_args()
+
+    generator = ApiKeyGen(prefix=args.prefix)
+    new_key_data = generator.generate()
+    
+    print("--- API-KEY-GEN ---")
+    print(f"Give this to the user: {new_key_data['raw_key']}")
+    print(f"Save this to the DB:   {new_key_data['db_hash']}")

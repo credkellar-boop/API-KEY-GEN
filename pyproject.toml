@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "api-key-gen"
+version = "1.0.0"
+authors = [
+  { name="Your Name", email="your.email@example.com" },
+]
+description = "A secure, 256-bit API key generator and hasher."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security :: Cryptography",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/api-key-gen"
+"Bug Tracker" = "https://github.com/yourusername/api-key-gen/issues"

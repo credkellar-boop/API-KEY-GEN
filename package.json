@@ -1,0 +1,19 @@
+{
+  "name": "api-key-gen",
+  "version": "1.0.0",
+  "description": "A secure, zero-dependency 256-bit API key generator and hasher.",
+  "main": "ApiKeyGen.js",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "keywords": [
+    "api",
+    "key",
+    "generator",
+    "crypto",
+    "security",
+    "sha256"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

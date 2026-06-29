@@ -1,0 +1,7 @@
+# Default owner for everything
+* @credkellar-boop
+
+# Specific owners for language modules
+/python/ @credkellar-boop
+/node/   @credkellar-boop
+/go/     @credkellar-boop

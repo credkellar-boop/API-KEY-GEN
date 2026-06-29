@@ -1,2 +1,11 @@
 # API-KEY-GEN
-Secure your applications with API-KEY-GEN, a multi-language utility for generating cryptographically strong, 256-bit API keys. Built for Python, Node.js, and Go, it features customizable prefixes for secret-scanning compatibility and automatically generates SHA-256 hashes to ensure secure, plaintext-free database storage.
+
+API-KEY-GEN creates cryptographically secure, 256-bit API keys. Available in Node.js, Python, and Go, it features customizable prefixes (like 'sk_live_') and auto-generates SHA-256 hashes so you never have to store plaintext keys in your database.
+
+## Why Use This?
+Standard random number generators (like `Math.random`) are predictable and vulnerable to brute-force attacks. API-KEY-GEN uses cryptographically secure pseudorandom number generators (CSPRNG) combined with best practices for database storage.
+
+## Features
+* **256-bit Entropy:** Generates 32-byte, highly secure keys.
+* **Secret-Scanning Safe:** Appends identifiable prefixes (e.g., `sk_live_`) so automated tools can flag leaked keys.
+* **Dual Output:** Returns the raw key (to show your user) and a SHA-256 hash (to safely store in your DB).

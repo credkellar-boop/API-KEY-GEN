@@ -1,0 +1,26 @@
+# --- Node.js ---
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.pytest_cache/
+
+# --- Go ---
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/bin/
+
+# --- Environment & OS ---
+.env
+.env.local
+.DS_Store
+Thumbs.db
